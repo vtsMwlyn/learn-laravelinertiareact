@@ -37,10 +37,6 @@ export default function create({isOpen, onClose}: {isOpen: boolean, onClose: () 
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
-            <DialogTrigger asChild>
-                <Button>New Product</Button>
-            </DialogTrigger>
-
             <DialogContent>
                 <form onSubmit={storeProduct}>
                     <DialogHeader>
@@ -56,7 +52,6 @@ export default function create({isOpen, onClose}: {isOpen: boolean, onClose: () 
                             <Input
                                 id="name"
                                 type="text"
-                                required
                                 autoFocus
                                 tabIndex={1}
                                 value={data.name}
@@ -71,8 +66,6 @@ export default function create({isOpen, onClose}: {isOpen: boolean, onClose: () 
                             <Input
                                 id="code"
                                 type="text"
-                                required
-                                autoFocus
                                 tabIndex={1}
                                 value={data.code}
                                 onChange={(e) => setData('code', e.target.value)}
@@ -86,8 +79,6 @@ export default function create({isOpen, onClose}: {isOpen: boolean, onClose: () 
                             <Input
                                 id="variant"
                                 type="text"
-                                required
-                                autoFocus
                                 tabIndex={1}
                                 value={data.variant}
                                 onChange={(e) => setData('variant', e.target.value)}
@@ -101,8 +92,6 @@ export default function create({isOpen, onClose}: {isOpen: boolean, onClose: () 
                             <Input
                                 id="manufacturer"
                                 type="text"
-                                required
-                                autoFocus
                                 tabIndex={1}
                                 value={data.manufacturer}
                                 onChange={(e) => setData('manufacturer', e.target.value)}
@@ -116,8 +105,6 @@ export default function create({isOpen, onClose}: {isOpen: boolean, onClose: () 
                             <Input
                                 id="stock"
                                 type="text"
-                                required
-                                autoFocus
                                 tabIndex={1}
                                 value={data.stock}
                                 onChange={(e) => setData('stock', Number(e.target.value))}

@@ -37,10 +37,6 @@ export default function del({product, isOpen, onClose}: {product: Product, isOpe
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
-            <DialogTrigger asChild>
-                <Button><i className="bi bi-trash3"></i></Button>
-            </DialogTrigger>
-
             <DialogContent>
                 <form onSubmit={destroyProduct}>
                     <DialogHeader>

@@ -46,10 +46,6 @@ export default function edit({product, isOpen, onClose}: {product: Product, isOp
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
-            <DialogTrigger asChild>
-                <Button><i className="bi bi-pencil-square"></i></Button>
-            </DialogTrigger>
-
             <DialogContent>
                 <form onSubmit={updateProduct}>
                     <DialogHeader>
@@ -62,7 +58,6 @@ export default function edit({product, isOpen, onClose}: {product: Product, isOp
                             <Input
                                 id="name"
                                 type="text"
-                                required
                                 autoFocus
                                 value={data.name} 
                                 onChange={(e) => setData('name', e.target.value)}

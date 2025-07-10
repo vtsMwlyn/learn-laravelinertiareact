@@ -1,8 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use Inertia\Inertia;
-use App\Models\Product;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -15,50 +14,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
 
-    Route::get('/products', function(){
-        return Inertia::render('products/index', [
-            'products' => Product::orderBy('name')->get()
-        ]);
-    })->name('products');
+    Route::get('/products', [ProductController::class, 'index'])->name('products');
 
     // API routes
     Route::prefix('/api')->name('api.')->group(function(){
-        Route::post('/products/create', function(Request $request){
-            $validated = $request->validate([
-                'name' => 'required',
-                'code' => 'required',
-                'variant' => 'required',
-                'manufacturer' => 'required',
-                'stock' => 'required|integer',
-            ]);
-
-            Product::create($validated);
-
-            return redirect()->route('products')->with('status', 'Product created successfully!');
-
-        })->name('products.store');
-
-        Route::patch('/products/{product}', function(Request $request, Product $product){
-            $validated = $request->validate([
-                'name' => 'required',
-                'code' => 'required',
-                'variant' => 'required',
-                'manufacturer' => 'required',
-                'stock' => 'required|integer',
-            ]);
-
-            $product->update($validated);
-
-            return redirect()->route('products')->with('status', 'Product edited successfully!');
-
-        })->name('products.update');
-
-        Route::delete('/products/{product}', function(Product $product){
-            $product->delete();
-
-            return redirect()->route('products')->with('status', 'Product deleted successfully!');
-
-        })->name('products.destroy');
+        Route::post('/products/create', [ProductController::class, 'store'])->name('products.store');
+        Route::patch('/products/{product}', [ProductController::class, 'update'])->name('products.update');
+        Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
     });
 });
 
