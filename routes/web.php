@@ -16,7 +16,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 
     Route::get('/products', function(){
-        return Inertia::render('products', [
+        return Inertia::render('products/index', [
             'products' => Product::orderBy('name')->get()
         ]);
     })->name('products');
@@ -35,7 +35,30 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Product::create($validated);
 
             return redirect()->route('products')->with('status', 'Product created successfully!');
+
         })->name('products.store');
+
+        Route::patch('/products/{product}', function(Request $request, Product $product){
+            $validated = $request->validate([
+                'name' => 'required',
+                'code' => 'required',
+                'variant' => 'required',
+                'manufacturer' => 'required',
+                'stock' => 'required|integer',
+            ]);
+
+            $product->update($validated);
+
+            return redirect()->route('products')->with('status', 'Product edited successfully!');
+
+        })->name('products.update');
+
+        Route::delete('/products/{product}', function(Product $product){
+            $product->delete();
+
+            return redirect()->route('products')->with('status', 'Product deleted successfully!');
+
+        })->name('products.destroy');
     });
 });
 
