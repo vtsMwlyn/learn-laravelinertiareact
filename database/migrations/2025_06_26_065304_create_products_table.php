@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
 
             $table->string('name');
-            $table->string('code');
             $table->string('variant');
+            $table->string('code');
+            $table->string('image_path');
             $table->string('manufacturer');
             $table->unsignedInteger('stock');
 

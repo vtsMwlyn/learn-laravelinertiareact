@@ -21,8 +21,9 @@ const breadcrumbs: BreadcrumbItem[] = [
 interface Product {
     id: number;
     name: string;
-    code: string;
+    image_path: string,
     variant: string;
+    code: string;
     manufacturer: string;
     stock: number;
 }
@@ -43,8 +44,8 @@ export default function index({products, filters}: {products: Product[], filters
         if (debouncedSearchTerm) {
             queryData.search = debouncedSearchTerm;
         }
-        
-        router.get(route('products'), queryData, { 
+
+        router.get(route('products'), queryData, {
             preserveState: true, replace: true,
         });
     }, [debouncedSearchTerm]);
@@ -74,9 +75,9 @@ export default function index({products, filters}: {products: Product[], filters
                     <thead>
                         <tr className="bg-slate-600 text-white">
                             <td>#</td>
-                            <td>Product Name</td>
-                            <td>Product Code</td>
-                            <td>Variant</td>
+                            <td>Code</td>
+                            <td>Product</td>
+                            <td>Image</td>
                             <td>Manufacturer</td>
                             <td>Stock</td>
                             <td>Actions</td>
@@ -86,9 +87,17 @@ export default function index({products, filters}: {products: Product[], filters
                         {products.length > 0 ? products.map((product, index) => (
                             <tr key={product.id}>
                                 <td>{index + 1}</td>
-                                <td>{product.name}</td>
                                 <td>{product.code}</td>
-                                <td>{product.variant}</td>
+                                <td>{`${product.name} ${product.variant}`}</td>
+                                <td>
+                                    {(product.image_path !== null) ? (
+                                        <img src={product.image_path} className="w-50 h-30 object-cover object-center rounded-lg" />
+                                    ) : (
+                                        <div className="w-50 h-30 flex items-center justify-center bg-slate-400 rounded-lg">
+                                            <i className="bi bi-image-fill text-white text-2xl"></i>
+                                        </div>
+                                    )}
+                                </td>
                                 <td>{product.manufacturer}</td>
                                 <td>{product.stock}</td>
                                 <td>

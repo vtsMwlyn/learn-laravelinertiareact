@@ -19,7 +19,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // API routes
     Route::prefix('/api')->name('api.')->group(function(){
         Route::post('/products/create', [ProductController::class, 'store'])->name('products.store');
-        Route::patch('/products/{product}', [ProductController::class, 'update'])->name('products.update');
+        Route::post('/products/{product}', [ProductController::class, 'update'])->name('products.update'); // put and patch cannot work with file upload somehow
         Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
     });
 });

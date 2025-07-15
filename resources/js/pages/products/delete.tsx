@@ -46,7 +46,7 @@ export default function del({product, isOpen, onClose}: {product: Product, isOpe
                     <DialogDescription>
                         <p className="mt-4">Are you sure want to delete this item: <strong>{product.name}</strong>? This action cannot be undone!</p>
                     </DialogDescription>
-                    
+
                     <DialogFooter>
                         <div className="w-full flex flex-col items-start gap-6 mt-4">
                             <Button type="submit" className="self-end" disabled={processing}>
