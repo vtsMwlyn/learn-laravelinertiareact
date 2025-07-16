@@ -25,7 +25,7 @@ class ProductController extends Controller
             'stock' => 'required|integer',
         ]);
 
-        $path = url('/') . '/storage/' . $request->file('image')->store('product-images'); // For file upload only
+        $path = str_replace('/public', '', url('/')) . '/storage/app/public/' . $request->file('image')->store('product-images'); // For file upload only
         $validated['image_path'] = $path; // For file upload only
         unset($validated['image']); // For file upload only
 
@@ -45,9 +45,9 @@ class ProductController extends Controller
         ]);
 
         if($request->file('image')){
-            $pureStoragePath = str_replace(url('/') . '/storage/', '', $product->image_path);
+            $pureStoragePath = str_replace(str_replace('/public', '', url('/')) . '/storage/app/public/', '', $product->image_path);
             Storage::disk('public')->delete($pureStoragePath);
-            $path = url('/') . '/storage/' . $request->file('image')->store('product-images');
+            $path = str_replace('/public', '', url('/')) . '/storage/app/public/' . $request->file('image')->store('product-images');
             $validated['image_path'] = $path;
         } // For file upload only
 
