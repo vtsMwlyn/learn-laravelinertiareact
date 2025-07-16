@@ -22,7 +22,7 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-interface Product {
+type Product = {
     id: number;
     name: string;
     image_path: string,
@@ -34,7 +34,7 @@ interface Product {
 
 export default function index({products, filters}: {products: Product[], filters?: {search?: string}}){
     // CRUD states
-    const [isCreating, setIsCreating] = useState(false);
+    const [isCreating, setIsCreating] = useState<boolean>(false);
     const [isEditing, setIsEditing] = useState<Product | null>(null);
     const [isDeleting, setIsDeleting] = useState<Product | null>(null);
 
