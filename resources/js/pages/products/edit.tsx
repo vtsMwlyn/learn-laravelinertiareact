@@ -16,7 +16,7 @@ import {
     DialogFooter,
 } from '@/components/ui/dialog';
 
-interface Product {
+type Product = {
     id: number;
     name: string;
     variant: string;

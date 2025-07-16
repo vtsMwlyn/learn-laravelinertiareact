@@ -12,7 +12,7 @@ import {
     DialogFooter,
 } from '@/components/ui/dialog';
 
-interface Product {
+type Product = {
     id: number;
     name: string;
     code: string;
