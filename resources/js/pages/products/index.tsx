@@ -13,8 +13,12 @@ import DeleteProduct from './delete';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
+        title: 'Home',
+        href: route('dashboard'),
+    },
+    {
         title: 'Products',
-        href: '/products',
+        href: route('products'),
     },
 ];
 
